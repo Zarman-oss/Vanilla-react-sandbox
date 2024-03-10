@@ -4,11 +4,14 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'eslint-plugin-react',
     'plugin:react/jsx-runtime',
+    'plugin: jsx-ally/recommended',
     'plugin:react-hooks/recommended',
     'plugin:import/errors', // Add import plugin for import rules
     'plugin:import/warnings',
-    'plugin:import/typescript', // Add import plugin for TypeScript support
+    'plugin:import/typescript',
+    'prettier', // Add import plugin for TypeScript support
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },

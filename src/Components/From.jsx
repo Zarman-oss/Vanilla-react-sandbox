@@ -1,7 +1,13 @@
 import { useState } from 'react';
 
-export default function From() {
+export default function Form() {
+  const ANIMALS = ['bird', 'cat', 'dog', 'reptile'];
+
   const [location, setLocation] = useState('');
+  const [animal, setAnimal] = useState('');
+  const [breed, setBreed] = useState('');
+
+  const breeds = [];
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -16,13 +22,14 @@ export default function From() {
           <form className="space-y-6">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="location"
                 className="block text-sm font-medium text-gray-700"
               >
                 Location
               </label>
               <div className="mt-1">
                 <input
+                  id="email"
                   onChange={(e) => setLocation(e.target.value)}
                   value={location}
                   placeholder="Enter Location"
@@ -31,11 +38,52 @@ export default function From() {
                 />
               </div>
             </div>
+            <div>
+              <label
+                htmlFor="animal"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Animals
+              </label>
+              <div className="mt-1">
+                <select
+                  id="animal"
+                  value={animal}
+                  onChange={(e) => {
+                    setAnimal(e.target.value);
+                    setBreed('');
+                  }}
+                >
+                  {ANIMALS.map((animal) => (
+                    <option key={animal}>{animal}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="breed"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Breed
+              </label>
+              <div className="mt-1">
+                <select
+                  id="breed"
+                  disabled={breeds.length === 0}
+                  value={breed}
+                  onChange={(e) => setBreed(e.target.value)}
+                >
+                  {breeds.map((breed) => (
+                    <option key={breed}>{breed}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </form>
-          <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow">
+          <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow">
             Submit
           </button>
-          {location}
         </div>
       </div>
     </div>
