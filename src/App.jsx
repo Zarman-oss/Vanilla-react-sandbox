@@ -1,10 +1,12 @@
 import Form from '../src/Components/From.jsx';
-import Users from './Components/Users.jsx';
+import Pet from './Components/Pet.jsx';
 export default function App() {
   return (
-    <>
-      {/* <Users name="Jane " order="whopty whoop" address="abc main street" /> */}
+    <div>
+      <Pet name="Jack" animal="dog" breed="Havanese" />
+      <Pet name="Jack" animal="dog" breed="Havanese" />
+      <Pet name="Jack" animal="dog" breed="Havanese" />
       <Form />
-    </>
+    </div>
   );
 }

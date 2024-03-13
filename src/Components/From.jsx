@@ -1,13 +1,35 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import Pet from './Pet.jsx';
+import useBreedList from '../Components/useBreedList.jsx';
 export default function Form() {
   const ANIMALS = ['bird', 'cat', 'dog', 'reptile'];
 
   const [location, setLocation] = useState('');
   const [animal, setAnimal] = useState('');
   const [breed, setBreed] = useState('');
+  const [pets, setPets] = useState([]);
 
-  const breeds = [];
+  const [breeds] = useBreedList(animal);
+
+  const promise = fetch('http://pets-v2.dev-apis.com/pets');
+  promise.then(function (res) {
+    const data = res.json();
+    console.log(data);
+  });
+
+  useEffect(() => {
+    requestPets();
+  }, []);
+
+  const requestPets = async () => {
+    const res = await fetch(
+      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+    );
+
+    const data = await res.json();
+
+    setPets(data.pets);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -19,7 +41,13 @@ export default function Form() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6">
+          <form
+            className="space-y-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              requestPets();
+            }}
+          >
             <div>
               <label
                 htmlFor="location"
@@ -33,7 +61,6 @@ export default function Form() {
                   onChange={(e) => setLocation(e.target.value)}
                   value={location}
                   placeholder="Enter Location"
-                  required
                   className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
@@ -80,10 +107,22 @@ export default function Form() {
                 </select>
               </div>
             </div>
+            <button
+              type="submit"
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow"
+            >
+              Submit
+            </button>
           </form>
-          <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow">
-            Submit
-          </button>
+
+          {pets.map((pet) => (
+            <Pet
+              name={pet.name}
+              animal={pet.name}
+              breed={pet.breed}
+              key={pet.id}
+            />
+          ))}
         </div>
       </div>
     </div>
