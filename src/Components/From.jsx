@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import Pet from './Pet.jsx';
 import useBreedList from '../Components/useBreedList.jsx';
+import Results from './Results.jsx';
+
 export default function Form() {
   const ANIMALS = ['bird', 'cat', 'dog', 'reptile'];
 
@@ -8,14 +9,7 @@ export default function Form() {
   const [animal, setAnimal] = useState('');
   const [breed, setBreed] = useState('');
   const [pets, setPets] = useState([]);
-
   const [breeds] = useBreedList(animal);
-
-  const promise = fetch('http://pets-v2.dev-apis.com/pets');
-  promise.then(function (res) {
-    const data = res.json();
-    console.log(data);
-  });
 
   useEffect(() => {
     requestPets();
@@ -115,14 +109,7 @@ export default function Form() {
             </button>
           </form>
 
-          {pets.map((pet) => (
-            <Pet
-              name={pet.name}
-              animal={pet.name}
-              breed={pet.breed}
-              key={pet.id}
-            />
-          ))}
+          <Results pets={pets} />
         </div>
       </div>
     </div>

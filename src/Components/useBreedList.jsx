@@ -16,7 +16,7 @@ export default function useBreedList(animal) {
       requestBreedList();
     }
 
-    const requestBreedList = async () => {
+    async function requestBreedList() {
       setBreedList([]);
       setStatus('Loading');
       const res = await fetch(
@@ -28,7 +28,7 @@ export default function useBreedList(animal) {
       localCache[animal] = data.breeds || [];
       setBreedList(localCache[animal]);
       setStatus('loaded');
-    };
+    }
   }, [animal]);
 
   return [breedList, status];
