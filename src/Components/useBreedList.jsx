@@ -10,6 +10,7 @@ export default function useBreedList(animal) {
   useEffect(() => {
     if (!animal) {
       setBreedList([]);
+      7643;
     } else if (localCache[animal]) {
       setBreedList(localCache[animal]);
     } else {
