@@ -1,12 +1,12 @@
-import Form from '../src/Components/From.jsx';
-import Pet from './Components/Pet.jsx';
+import Badge from './Components/Badge.jsx';
 export default function App() {
   return (
-    <div>
-      <Pet name="Jack" animal="dog" breed="Havanese" />
-      <Pet name="Jack" animal="dog" breed="Havanese" />
-      <Pet name="Jack" animal="dog" breed="Havanese" />
-      <Form />
+    <div className="bg-gray-900 min-h-screen">
+      <Badge
+        name="Jo sh McDaniel"
+        handle="crazyjoshi"
+        img="https://avatar0.githubusercontent.com/u/2933430"
+      />
     </div>
   );
 }
